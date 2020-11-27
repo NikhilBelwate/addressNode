@@ -7,8 +7,16 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var dataRouter = require('./routes/data');
 
+var cors = require('cors');
+
 var app = express();
 
+app.use(cors());
+const corsOptions = {
+  origin: true,
+  credentials: true
+}
+app.options('*', cors(corsOptions)); // preflight OPTIONS; put before other routes
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
